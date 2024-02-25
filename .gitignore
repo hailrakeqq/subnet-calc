@@ -1,0 +1,4 @@
+/SubnetCalc.Client.Desktop/obj/*
+/SubnetCalc.Client.Desktop/bin/*
+
+.idea/*
