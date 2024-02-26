@@ -1,7 +1,6 @@
 using Gtk;
 using System;
 using UI = Gtk.Builder.ObjectAttribute;
-using SubnetCalc;
 namespace SubnetCalc.Client.Desktop;
 
 class MainWindow : Window
@@ -10,6 +9,13 @@ class MainWindow : Window
     [UI] private Button calculate_btn = null;
     [UI] private Entry ip_input = null;
     [UI] private ComboBoxText subnet_masks = null;
+    [UI] private Label network_str = null;
+    [UI] private Label firstIP_str = null;
+    [UI] private Label lastIP_str = null;
+    [UI] private Label broadcast_str = null;
+    [UI] private Label range_str = null;
+    [UI] private Label host_count_str = null;
+    [UI] private Label ip_count_str = null;
 
     public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
@@ -30,17 +36,13 @@ class MainWindow : Window
         var calculator = new IPCalculator(ip, mask);
 
         var result = calculator.Calculate();
-        Console.WriteLine(result.Network);
-        Console.WriteLine(result.NetworkClass);
-        Console.WriteLine(result.FirstIPAddress);
-        Console.WriteLine(result.LastIPAddress);
-        Console.WriteLine(result.BroadcastIPAddress);
-        Console.WriteLine(result.Range);
-        Console.WriteLine(result.HostCount);
-        Console.WriteLine(result.IPAddressCount);
-
-        //TODO: render this info in GUI (label)
-
+        network_str.Text = $"Subnet: {result.Network} ({result.NetworkClass})";
+        firstIP_str.Text = $"First IP: {result.FirstIPAddress}";
+        lastIP_str.Text = $"Last IP: {result.LastIPAddress}";
+        broadcast_str.Text = $"Broadcast: {result.BroadcastIPAddress}";
+        range_str.Text = $"Range: {result.Range}";
+        host_count_str.Text = $"Host Count: {result.HostCount.ToString()}";
+        ip_count_str.Text = $"IP Address Count: {result.IPAddressCount.ToString()}";
     }
 
     private void QuitButton_Clicked(object sender, EventArgs e)
