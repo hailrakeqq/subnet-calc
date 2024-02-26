@@ -14,7 +14,6 @@ class IpResult
     public int HostCount { get; set; }
     public int IPAddressCount { get; set; }
 
-    // Простой конструктор
     public IpResult(string network, string networkClass, string firstIPAddress, string lastIPAddress, string broadcastIPAddress, string range, int hostCount, int IPAddressCount)
     {
         Network = network;
